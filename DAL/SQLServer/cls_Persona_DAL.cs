@@ -6,5 +6,8 @@ namespace DAL.SQLServer
 {
     public class cls_Persona_DAL
     {
+        #region VARIABLES PUBLICAS
+
+        #endregion
     }
 }
