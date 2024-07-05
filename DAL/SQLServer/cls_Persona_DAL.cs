@@ -34,7 +34,7 @@ namespace DAL.SQLServer
 
             using (var CNXSQL = new SqlConnection(_iConfiguracion.GetConnectionString("ConexionSQLServer")))
             {
-                return (List<cls_Persona>)CNXSQL.Query<cls_Persona>("dbo.Sp_Consultar_Perfil", parametros, commandType: CommandType.StoredProcedure);
+                return (List<cls_Persona>)CNXSQL.Query<cls_Persona>("dbo.Sp_Consultar_Persona", parametros, commandType: CommandType.StoredProcedure);
             }
         }
 

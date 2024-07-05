@@ -54,7 +54,7 @@ namespace WebApi_Examen_I
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Persona}/{action=Index}/{id?}");
             });
         }
     }
