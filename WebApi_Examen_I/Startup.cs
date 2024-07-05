@@ -1,3 +1,7 @@
+using BLL.Interfaces;
+using BLL.SQLServer;
+using DAL.Interfaces;
+using DAL.SQLServer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +27,10 @@ namespace WebApi_Examen_I
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            //INYECCIONES DEPENDENCIA SQLSERVER
+            services.AddTransient(typeof(IPersona_BLL), typeof(cls_Persona_BLL));
+            services.AddTransient(typeof(IPersona_DAL), typeof(cls_Persona_DAL));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,7 +54,7 @@ namespace WebApi_Examen_I
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Persona}/{action=Index}/{id?}");
             });
         }
     }
