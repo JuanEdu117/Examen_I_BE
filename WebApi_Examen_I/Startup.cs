@@ -1,6 +1,8 @@
 using BLL.Interfaces;
+using BLL.MongoDB;
 using BLL.SQLServer;
 using DAL.Interfaces;
+using DAL.MongoDB;
 using DAL.SQLServer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,7 +29,9 @@ namespace WebApi_Examen_I
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
+            //INYECCIONES DEPENDENCIA MONGODB
+            services.AddTransient(typeof(IArticulo_BLL), typeof(cls_Articulo_BLL));
+            services.AddTransient(typeof(IArticulo_DAL), typeof(cls_Articulo_DAL));
             //INYECCIONES DEPENDENCIA SQLSERVER
             services.AddTransient(typeof(IPersona_BLL), typeof(cls_Persona_BLL));
             services.AddTransient(typeof(IPersona_DAL), typeof(cls_Persona_DAL));
