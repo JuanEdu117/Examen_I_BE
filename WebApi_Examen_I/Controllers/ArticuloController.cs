@@ -49,9 +49,10 @@ namespace WebApi_Examen_I.Controllers
 
         [HttpPut]
         [Route(nameof(ModificarArticulo))]
-        public bool ModificarArticulo([FromHeader] int iCod, [FromBody] cls_Articulo Obj_Articulo) 
+        public bool ModificarArticulo([FromHeader] string _sId, [FromBody] cls_Articulo Obj_Articulo) 
         {
-            return _IArticulo_BLL.ModificarArticulo(new cls_Articulo {iCodigo = iCod, 
+            return _IArticulo_BLL.ModificarArticulo(new cls_Articulo {    sId = _sId,
+                                                                      iCodigo = Obj_Articulo.iCodigo, 
                                                              iCant_Disponible = Obj_Articulo.iCant_Disponible,       //RECIBO POR EL ENCABEZADO EL "ID"
                                                                  sDescripcion = Obj_Articulo.sDescripcion,           //INICIALIZAMOS VARIABLES CON BASE A LAS PROPIEDADES 
                                                             dbPrecio_Unitario = Obj_Articulo.dbPrecio_Unitario,      //DATOS NUEVOS QUE RECIBO DEL BODY
@@ -60,9 +61,9 @@ namespace WebApi_Examen_I.Controllers
 
         [HttpDelete]
         [Route(nameof(EliminarArticulo))]
-        public bool EliminarArticulo([FromHeader] int iCod) 
+        public bool EliminarArticulo([FromHeader] string _sId) 
         {
-            return _IArticulo_BLL.EliminarArticulo(new cls_Articulo {iCodigo = iCod });
+            return _IArticulo_BLL.EliminarArticulo(new cls_Articulo {sId = _sId });
         }
         #endregion
     }
