@@ -11,6 +11,7 @@ namespace Entidad.MongoDB
         #region VARIABLES PUBLICAS
         [BsonId]                                    //INDICA SOBRE LA PROPIEDAD AL ESTABLECER
         [BsonRepresentation(BsonType.ObjectId)]     //REPRESENTADA COMO EL TYPE DATO OBJ ID
+        public string sId { get ; set ; }
 
         [BsonElement("Codigo")]                       //LE PODEMOS CAMBIAR EL NOMBRE POR EL CUAL GUARDAR " "
         public int iCodigo { get; set; }
