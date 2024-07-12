@@ -82,13 +82,13 @@ namespace DAL.MongoDB
                 EstablecerConexion();
                 var Coleccion = _IDataBase.GetCollection<cls_Articulo>("ArticuloResgistro");        // GENERO COLECCION OBTENGA DATOS DE LA TABLA Y GUARDE
                 
-                if (!string.IsNullOrEmpty(P_Entidad.iCodigo.ToString()))               //GENERO LAS CONDICIONES DE CONSULTA
+                if (!string.IsNullOrEmpty(P_Entidad.sId))               //GENERO LAS CONDICIONES DE CONSULTA
+                {
+                    _lstResultado = Coleccion.Find(doc => doc.sId.Equals(P_Entidad.sId)).ToList().OrderBy(orden => orden.sDescripcion).ToList();
+                }
+                else if (!string.IsNullOrEmpty(P_Entidad.iCodigo.ToString()))
                 {
                     _lstResultado = Coleccion.Find(doc => doc.iCodigo.Equals(P_Entidad.iCodigo)).ToList().OrderBy(orden => orden.sDescripcion).ToList();
-                }
-                else if (!string.IsNullOrEmpty(P_Entidad.dbPrecio_Unitario.ToString()))
-                {
-                    _lstResultado = Coleccion.Find(doc => doc.dbPrecio_Unitario.Equals(P_Entidad.dbPrecio_Unitario)).ToList().OrderBy(orden => orden.sDescripcion).ToList();
                 }
                 else if (!string.IsNullOrEmpty(P_Entidad.sDescripcion))
                 {                                                           //UTILIZA CONTAINS CONTENGA COSAS QUE AVERIGUE LA PALABRA
@@ -152,7 +152,7 @@ namespace DAL.MongoDB
             {
                 EstablecerConexion();
                 var Coleccion = _IDataBase.GetCollection<cls_Articulo>("ArticuloResgistro");                // GENERO COLECCION OBTENGA DATOS DE LA TABLA Y GUARDE
-                Coleccion.ReplaceOne(registros => registros.iCodigo.Equals(P_Entidad.iCodigo),P_Entidad);   //INSTRUCCION REPLACE ONE //DE TODOS LOS REGISTROS BUSQUE EL ID                                            //CREA LA INFO AUTOMATICO INSERT UNO A UNO
+                Coleccion.ReplaceOne(registros => registros.sId.Equals(P_Entidad.sId),P_Entidad);   //INSTRUCCION REPLACE ONE //DE TODOS LOS REGISTROS BUSQUE EL ID                                            //CREA LA INFO AUTOMATICO INSERT UNO A UNO
                 _bResultado = true;
             }
             catch (Exception ex)
@@ -180,7 +180,7 @@ namespace DAL.MongoDB
             {
                 EstablecerConexion();
                 var Coleccion = _IDataBase.GetCollection<cls_Articulo>("ArticuloResgistro");      // GENERO COLECCION OBTENGA DATOS DE LA TABLA Y GUARDE
-                Coleccion.DeleteOne(registros => registros.iCodigo.Equals(P_Entidad.iCodigo));   //INTRUCCION DELETE ONE //DE TODOS LOS REGISTROS BUSQUE EL ID                                            //CREA LA INFO AUTOMATICO INSERT UNO A UNO
+                Coleccion.DeleteOne(registros => registros.sId.Equals(P_Entidad.sId));   //INTRUCCION DELETE ONE //DE TODOS LOS REGISTROS BUSQUE EL ID                                            //CREA LA INFO AUTOMATICO INSERT UNO A UNO
                 _bResultado = true;
             }
             catch (Exception ex)

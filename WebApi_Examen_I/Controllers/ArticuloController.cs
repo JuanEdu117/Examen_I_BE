@@ -35,9 +35,9 @@ namespace WebApi_Examen_I.Controllers
 
         [HttpGet]
         [Route(nameof(FiltrarArticulo))]
-        public List<cls_Articulo> FiltrarArticulo([FromHeader] int iCod, [FromHeader] double dbPrecio, [FromHeader] string sDescrip )
+        public List<cls_Articulo> FiltrarArticulo([FromHeader] string sIdArtic, [FromHeader] int iCod, [FromHeader] string sDescrip )
         {
-            return _IArticulo_BLL.ConsultaFiltrada(new cls_Articulo {iCodigo = iCod, dbPrecio_Unitario = dbPrecio, sDescripcion = sDescrip});
+            return _IArticulo_BLL.ConsultaFiltrada(new cls_Articulo {sId = sIdArtic, iCodigo = iCod, sDescripcion = sDescrip});
         }
 
         [HttpPost]
@@ -49,9 +49,9 @@ namespace WebApi_Examen_I.Controllers
 
         [HttpPut]
         [Route(nameof(ModificarArticulo))]
-        public bool ModificarArticulo([FromHeader] string _sId, [FromBody] cls_Articulo Obj_Articulo) 
+        public bool ModificarArticulo([FromHeader] string sIdArtic, [FromBody] cls_Articulo Obj_Articulo) 
         {
-            return _IArticulo_BLL.ModificarArticulo(new cls_Articulo {    sId = _sId,
+            return _IArticulo_BLL.ModificarArticulo(new cls_Articulo {    sId = sIdArtic,
                                                                       iCodigo = Obj_Articulo.iCodigo, 
                                                              iCant_Disponible = Obj_Articulo.iCant_Disponible,       //RECIBO POR EL ENCABEZADO EL "ID"
                                                                  sDescripcion = Obj_Articulo.sDescripcion,           //INICIALIZAMOS VARIABLES CON BASE A LAS PROPIEDADES 
@@ -61,9 +61,9 @@ namespace WebApi_Examen_I.Controllers
 
         [HttpDelete]
         [Route(nameof(EliminarArticulo))]
-        public bool EliminarArticulo([FromHeader] string _sId) 
+        public bool EliminarArticulo([FromHeader] string sIdArtic) 
         {
-            return _IArticulo_BLL.EliminarArticulo(new cls_Articulo {sId = _sId });
+            return _IArticulo_BLL.EliminarArticulo(new cls_Articulo {sId = sIdArtic });
         }
         #endregion
     }
